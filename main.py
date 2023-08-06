@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
+import re
 import os
 import json
 import openai
+import markdown
 from sklearn.metrics.pairwise import cosine_similarity
 
 openai.api_key = os.environ['OPENAI_API_KEY']
@@ -33,28 +35,29 @@ async def search_procedure(query: str):
   # Return the corresponding procedure
   return {"procedure": strings[index]}
 
+
 @app.get("/", response_class=HTMLResponse)
 async def home():
-    html_content = """
+  # Convert README.md into HTML
+  with open('README.md', 'r') as file:
+    content = file.read()
+  content = markdown.markdown(content)
+
+  # Replace <p><code> with <pre><code> and </code></p> with </code></pre>
+  content = re.sub(r'<p><code>(.*?)\n', r'<pre><code>\1\n', content)
+  content = content.replace('</code></p>', '</code></pre>')
+
+  # Serve the HTML at `/` using Water.css
+  html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
         <title>Open Procedures</title>
     </head>
-    <body>
-        <h1>Open Procedures</h1>
-        <p>Open Procedures is an open-source database of tiny, structured coding tutorials. We can query it semantically.</p>
-        <p>Designed for language models to fetch information about how to complete a coding task, Open Procedures offers a simple and efficient way to access coding knowledge. It's built on an open-source platform and uses text embeddings to understand and respond to natural language queries.</p>
-        <p>Here's how you can query the Open Procedures database:</p>
-        <h2>Using Python:</h2>
-        <pre><code>import requests
-        query = 'How to reverse a string in Python?'
-        response = requests.get('http://127.0.0.1:8000/search/', params={'query': query})
-        print(response.json())</code></pre>
-        <h2>Using cURL:</h2>
-        <pre><code>curl -G 'http://127.0.0.1:8000/search/' --data-urlencode 'query=How to reverse a string in Python?'</code></pre>
+    <body class="prose p-4">
+        {content}
     </body>
     </html>
     """
-    return HTMLResponse(content=html_content)
+  return HTMLResponse(html_content)

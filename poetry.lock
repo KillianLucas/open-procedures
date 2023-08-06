@@ -173,6 +173,18 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "markdown"
+version = "3.4.4"
+description = "Python implementation of John Gruber's Markdown."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["mkdocs (>=1.0)", "mkdocs-nature (>=0.4)", "mdx-gh-links (>=0.2)"]
+testing = ["coverage", "pyyaml"]
+
+[[package]]
 name = "multidict"
 version = "6.0.4"
 description = "multidict implementation"
@@ -388,7 +400,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "d74e8e44b8d55d1e6eec4209a8f8cea7b1a8bc9da1e49e3322c7eaec23e04203"
+content-hash = "3f5b7232dbad78ca2ea8de320849b0d55440f5f65ac7d8f6125a5569b5bfce08"
 
 [metadata.files]
 aiohttp = []
@@ -407,6 +419,7 @@ frozenlist = []
 h11 = []
 idna = []
 joblib = []
+markdown = []
 multidict = []
 numpy = []
 openai = []
