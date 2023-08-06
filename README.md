@@ -14,10 +14,8 @@ View the source or contribute to the project on [GitHub](https://github.com/Kill
 
 ```python
 import requests
-
 query = 'How to reverse a string in Python?'
 response = requests.get('https://open-procedures.replit.app/search/', params={'query': query})
-
 print(response.json())
 ```
 

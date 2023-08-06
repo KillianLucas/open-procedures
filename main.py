@@ -41,10 +41,12 @@ async def home():
   # Convert README.md into HTML
   with open('README.md', 'r') as file:
     content = file.read()
+    print("c", content)
 
   # Remove ```python and ```bash language tags, which aren't properly converted
-  content = content.replace("```python", "```\n").replace("```bash", "```\n")
+  content = content.replace("```python", "```").replace("```bash", "```")
   content = markdown.markdown(content)
+  print("co", content)
 
   # Replace <p><code> with <pre><code> and </code></p> with </code></pre>
   content = re.sub(r'<p><code>(.*?)\n', r'<pre><code>\1\n', content)
