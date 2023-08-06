@@ -9,7 +9,7 @@ The entire collection of coding tutorials is open source and can be found on [Gi
 
 [Here's an example query](https://open-procedures.replit.app/search/?query=traceback) for learning how to handle a traceback in Python.
 
-Please star Open Procedures on [GitHub](https://github.com/KillianLucas/open-procedures).
+View the code or contribute to the project on [GitHub](https://github.com/KillianLucas/open-procedures).
 
 ---
 
