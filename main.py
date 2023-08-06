@@ -41,6 +41,9 @@ async def home():
   # Convert README.md into HTML
   with open('README.md', 'r') as file:
     content = file.read()
+
+  # Remove ```python and ```bash language tags, which aren't properly converted
+  content = content.replace("```python", "```\n").replace("```bash", "```\n")
   content = markdown.markdown(content)
 
   # Replace <p><code> with <pre><code> and </code></p> with </code></pre>
@@ -55,7 +58,7 @@ async def home():
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
         <title>Open Procedures</title>
     </head>
-    <body class="prose p-4">
+    <body>
         {content}
     </body>
     </html>

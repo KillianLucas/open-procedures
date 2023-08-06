@@ -1,6 +1,6 @@
 # Open Procedures
 
-**Open Procedures** is an open-source project offering tiny, structured coding tutorials that can be searched semantically. It was created to help [code-interpreting language models](http://openinterpreter.com/) complete various tasks by fetching relevant and up-to-date code snippets.
+**Open Procedures** is an open-source project offering tiny, structured coding tutorials that can be searched semantically. It was created to help [code-interpreting language models](http://openinterpreter.com/) complete complete various tasks by fetching relevant and up-to-date code snippets.
 
 The entire collection of coding tutorials is open source and can be found on [GitHub](https://github.com/KillianLucas/open-procedures/tree/main/procedures). The community is highly encouraged to contribute by adding new tutorials or editing existing ones.
 
