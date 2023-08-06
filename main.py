@@ -1,24 +1,30 @@
 from fastapi import FastAPI
-from sentence_transformers import SentenceTransformer
+import openai
+import json
 from sklearn.metrics.pairwise import cosine_similarity
-import pickle
+import os
+
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 app = FastAPI()
 
-# Load a pre-trained sentence transformer model
-model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-
-# Load the saved embeddings and strings
-with open('vector_db.pkl', 'rb') as f:
-    strings, embeddings = pickle.load(f)
+# Load the saved procedures and embeddings
+with open('vector_db.json', 'r') as f:
+    data = json.load(f)
+    strings = data['strings']
+    embeddings = data['embeddings']
 
 @app.get("/search/")
 async def search_procedure(query: str):
-    # Generate embedding for the query
-    query_embedding = model.encode([query])
+    # Generate embedding for the query using OpenAI Ada
+    response = openai.Embedding.create(
+        input=query,
+        model="text-embedding-ada-002"
+    )
+    query_embedding = response['data'][0]['embedding']
 
     # Compute cosine similarity between the query embedding and the saved embeddings
-    similarities = cosine_similarity(query_embedding, embeddings)[0]
+    similarities = cosine_similarity([query_embedding], embeddings)[0]
 
     # Get the index of the most similar embedding
     index = similarities.argmax()
