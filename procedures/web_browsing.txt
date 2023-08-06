@@ -1,0 +1,2 @@
+To use a web browser, use `selenium`
+Note: Webpack is no longer required. Just use `driver = webdriver.Chrome()`
