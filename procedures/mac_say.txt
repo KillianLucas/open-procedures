@@ -1,0 +1,2 @@
+## Saying Things Out Loud
+`osascript -e 'say "text_to_say"'`

@@ -1,0 +1,2 @@
+To use applications like Mail for reading and writing emails, Calendar for creating and reading calendar events, iTunes for playing and pausing songs, Finder for emptying the trash, etc:
+(If Mac) Run Applescript with `osascript -e`

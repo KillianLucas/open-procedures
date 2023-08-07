@@ -1,0 +1,2 @@
+To adjust system settings like dark/light mode, volume, etc:
+(If Mac) Run Applescript with `osascript -e`.

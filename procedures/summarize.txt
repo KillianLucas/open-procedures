@@ -1,0 +1,1 @@
+To summarize something, do not write code. Simply print/read the text then summarize it yourself.

@@ -29,11 +29,14 @@ async def search_procedure(query: str):
   # Compute cosine similarity between the query embedding and the saved embeddings
   similarities = cosine_similarity([query_embedding], embeddings)[0]
 
-  # Get the index of the most similar embedding
-  index = similarities.argmax()
+  # Get the indices of the embeddings sorted by similarity
+  sorted_indices = similarities.argsort()[::-1]
 
-  # Return the corresponding procedure
-  return {"procedure": strings[index]}
+  # Get the top 2 most similar procedures
+  top_procedures = [strings[index] for index in sorted_indices[:2]]
+
+  # Return the corresponding procedures
+  return {"procedures": top_procedures}
 
 
 @app.get("/", response_class=HTMLResponse)

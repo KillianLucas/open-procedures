@@ -1,2 +1,86 @@
-To use a web browser, use `selenium`
-Note: Webpack is no longer required. Just use `driver = webdriver.Chrome()`
+## Web Browsing, playing videos on YouTube, searching Google, etc.
+Prefer `selenium`.
+
+**IMPORTANT NOTE:** `webdriver_manager` is no longer required to use `selenium`. NEVER INSTALL `webdriver_manager`. Simply use `driver = selenium.webdriver.Chrome()`
+
+To locate elements on a page:
+
+```
+from selenium.webdriver.common.by import By
+driver.find_element(By.XPATH, '//button[text()="Some text"]')
+driver.find_elements(By.XPATH, '//button')
+```
+
+Attributes available for By class:
+
+```
+ID = "id"
+NAME = "name"
+XPATH = "xpath"
+LINK_TEXT = "link text"
+PARTIAL_LINK_TEXT = "partial link text"
+TAG_NAME = "tag name"
+CLASS_NAME = "class name"
+CSS_SELECTOR = "css selector"
+```
+
+With the constraint that you don't have access to any visual tools, here's how you can approach browsing an unknown website:
+
+1. **Use Basic HTML Knowledge**: Given that you can't visually inspect elements, your approach will rely on an understanding of common HTML practices. Many websites use similar structures for forms, buttons, and links, so this knowledge can guide your search.
+
+2. **Search for Common Elements by Tag Name**:
+   ```python
+   from selenium.webdriver.common.by import By
+
+   # Find all input elements, which might include search bars or other text fields
+   inputs = driver.find_elements(By.TAG_NAME, 'input')
+   ```
+
+3. **Utilize Xpath or CSS Selectors**:
+   ```python
+   # Find all input elements of type "text" (common for search bars)
+   search_bars = driver.find_elements(By.XPATH, "//input[@type='text']")
+
+   # Find all buttons
+   buttons = driver.find_elements(By.XPATH, '//button')
+   ```
+
+4. **Examine Attributes and Content Programmatically**: Without visual tools, you will need to programmatically investigate elements by checking their attributes, such as `type`, `name`, or `placeholder`. 
+   ```python
+   for input_field in inputs:
+       if input_field.get_attribute('type') == 'text':
+           # This could be a search bar or other text field
+   ```
+
+5. **Interact and Observe**: Since you don't have visual feedback, you may need to programmatically interact with elements and observe changes in the HTML to understand their functionality. You could input text, click buttons, and check if new elements appear or if the HTML changes in specific ways.
+
+6. **Filter Out Unnecessary Elements**: Utilize methods like `is_displayed()` to filter elements that are not relevant. Though you can't visually see them, these methods will help you understand if an element is hidden or not interactable.
+
+7. **Log or Print Information**: Since you can't see the webpage, logging information about the elements and their attributes is especially useful for understanding the structure of the page.
+
+8. **Handle Dynamic Content**: If the website likely relies on JavaScript, ensure that you're providing enough time for elements to load.
+
+As a first step, you might want to print the important elements on the page to get a sense of its structure:
+
+```python
+# Wait for JavaScript to load, looking for a common element like body
+WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+# Find all elements in the body
+body = driver.find_element(By.TAG_NAME, 'body')
+all_elements = body.find_elements(By.XPATH, ".//*")
+# Iterate through all elements and print the important ones
+for element in all_elements:
+    tag_name = element.tag_name.lower()
+    # Print input fields
+    if tag_name == 'input':
+        print(f"Input - Type: {element.get_attribute('type')}, Name: {element.get_attribute('name')}")
+    # Print buttons
+    elif tag_name == 'button':
+        print(f"Button - Text: {element.text}")
+    # Print links
+    elif tag_name == 'a':
+        print(f"Link - Href: {element.get_attribute('href')}")
+    # Print headings
+    elif tag_name in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+        print(f"Heading ({tag_name.upper()}) - {element.text}")
+```

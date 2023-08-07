@@ -1,1 +1,1 @@
-To download a YouTube video, use `yt-dlp`
+To download a YouTube video, use `yt-dlp`. If the user specified a format/extension, specify that format in `yt-dlp`.

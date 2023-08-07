@@ -1,2 +1,0 @@
-For OS actions like reading emails, opening files:
-(If Mac user) Write Applescript in a multiline string then use `subprocess` to run it.
