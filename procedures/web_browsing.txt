@@ -1,4 +1,6 @@
-## Web Browsing, playing videos on YouTube, searching Google, etc.
+trigger phrases: "can you play me a video on Youtube", "open YouTube", "search YouTube", "can you search the web for", "look up the weather in..."
+
+## Web Browsing
 Prefer `selenium`.
 
 **IMPORTANT NOTE:** `webdriver_manager` is no longer required to use `selenium`. NEVER INSTALL `webdriver_manager`. Simply use `driver = selenium.webdriver.Chrome()`
