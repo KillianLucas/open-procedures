@@ -1,1 +1,3 @@
-To summarize something, do not write code. Simply print/read the text then summarize it yourself.
+trigger phrases: "summarize"
+
+To summarize something, DO NOT WRITE CODE. Simply print/read the text then summarize it yourself.

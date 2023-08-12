@@ -1,0 +1,11 @@
+trigger phrases: "can you play me a video on Youtube", "search YouTube"
+
+To play a YouTube video, use `selenium`:
+
+- Open Chrome
+- Navigate to YouTube
+- Find the search bar
+- Input the search query and press Enter
+- Wait for the results to load
+- Click the first video in the results
+- The video should now be playing; you might want to handle advertisements or auto-play as required

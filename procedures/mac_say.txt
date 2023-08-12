@@ -1,2 +1,2 @@
-## Saying Things Out Loud
-`osascript -e 'say "text_to_say"'`
+## Saying Things Out Loud / Text-to-speech
+(Mac) Use Applescript: say "text_to_say"

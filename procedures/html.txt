@@ -1,0 +1,7 @@
+trigger phrases: "design me a website", "write HTML"
+
+## Writing HTML to a tmp file
+1. Import Python's `tempfile` module.
+2. Use `tempfile.NamedTemporaryFile` to create a temporary HTML file.
+3. In a multiline string, write the HTML and inline Tailwind CSS. In the head, include: `<script src="https://cdn.tailwindcss.com"></script>`.
+4. Open the file using a shell command (e.g., `open tmpfile.name` on macOS or `xdg-open tmpfile.name` on Linux).

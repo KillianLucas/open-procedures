@@ -1,2 +1,4 @@
+trigger phrases: "display notification"
+
 To adjust system settings like dark/light mode, volume, etc:
-(If Mac) Run Applescript with `osascript -e`.
+(If Mac) Run Applescript.

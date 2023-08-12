@@ -1,3 +1,3 @@
 ## Retrieve Recent Emails
 Execute the following AppleScript command to get the content of the last X (in this case, 3) emails from the Mail application:
-`osascript -e 'tell application "Mail" to get content of messages 1 through 3 of inbox'
+tell application "Mail" to get content of messages 1 through 3 of inbox
