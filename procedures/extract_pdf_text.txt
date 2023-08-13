@@ -1,0 +1,13 @@
+trigger phrases: "extract text from pdf", "pdf", ".pdf", "summarize this document"
+
+# Extract text from a PDF
+1. Install PyPDF2
+2. Open the PDF file using PdfReader
+3. Extract text from the desired page using `extract_text()`
+
+```python
+from PyPDF2 import PdfReader
+
+pdf = PdfReader('path_to_your_file.pdf')
+text = pdf.pages[0].extract_text()
+```
