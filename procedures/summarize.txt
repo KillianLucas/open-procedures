@@ -2,11 +2,14 @@ trigger phrases: "summarize", "can you summarize this"
 
 To summarize something, USUALLY YOU CAN SIMPLY NOT WRITE CODE. Simply print/read the text then summarize it yourself.
 
-# If it's likely long / of unknown length, like a PDF, **INCLUDE THESE STEPS IN YOUR PLAN WRITTEN PLAN AT THE START**:
+# If it's likely long / of unknown length, like a PDF, run these commands:
 
-1. Print the first 2000 characters of the document.
-2. Manually write a summary for the printed chunk.
-3. Print the next 2000 characters.
-4. Write the following message AFTER the chunk is printed:
-5. "Now I will manually write a new summary that builds on / refines my last summary with this new information. I will integrate both, but weigh this next summary towards my last summary (which contains more important/global/structural information than the current chunk)."
-6. Repeat steps 3-5 (write that message EVERY time, after EVERY printed chunk) until the entire document is summarized.
+```shell
+pip install languagetools
+```
+
+```python
+from languagetools import summarizer
+
+summary = summarizer.summarize(text)
+```
