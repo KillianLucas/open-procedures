@@ -1,0 +1,4 @@
+trigger phrases: "week look like", "calendar"
+
+# Get calendar events
+(Mac) Use `brew install ical-buddy`

@@ -1,8 +1,10 @@
 trigger phrases: "summarize", "can you summarize this"
 
-To summarize something, USUALLY YOU CAN SIMPLY NOT WRITE CODE. Simply print/read the text then summarize it yourself.
+To summarize something, 99% OF THE TIME YOU CAN SIMPLY NOT WRITE CODE. Simply print/read the text then summarize it manually.
 
-# If it's likely long / of unknown length, like a PDF, run these commands:
+The vast majority of the time, that^ will be sufficient. ENSURE you can't read all the text at once before moving to the much more expensive languagetools options.
+
+If the text is of tremendous length, like a book or unseeable by you when you print it (outputs are truncated to 2000 characters), run these commands:
 
 ```shell
 pip install languagetools
