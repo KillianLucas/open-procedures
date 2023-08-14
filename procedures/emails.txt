@@ -1,0 +1,8 @@
+trigger phrases: "get emails", "send emails", "send an email", "email"
+
+## (Mac) Get emails
+Execute the following AppleScript command to get the content of the last X (in this case, 3) emails from the Mail application:
+tell application "Mail" to get content of messages 1 through 3 of inbox
+
+## (Mac) Send emails
+Use Applescript.

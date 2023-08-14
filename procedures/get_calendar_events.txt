@@ -1,4 +1,4 @@
 trigger phrases: "week look like", "calendar"
 
 # Get calendar events
-(Mac) Use `brew install ical-buddy`
+(Mac) Use `brew install ical-buddy` then something like `ical-buddy eventsFrom:today to:'today+7'`
