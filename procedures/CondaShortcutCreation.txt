@@ -1,7 +1,14 @@
-From the Windows terminal, to create a shortcut in Windows that opens a file (such as .py) in a specific Conda environment:
+trigger phrases: "create a shortcut", "make a shortcut", "shortcut to open file", "conda shortcut"
+
+From the Windows terminal, to create a shortcut that opens a file (such as .py) in a specific Conda environment, and a custom .ico if requested by the user:
 
 ```
-powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('C:\Users\[User]\Desktop\[ShortcutName].lnk'); $Shortcut.TargetPath = 'C:\Windows\System32\cmd.exe'; $Shortcut.Arguments = '/K call \"C:\Users\[User]\anaconda3\Scripts\activate.bat\" [EnvName] & python [PythonScriptPath]'; $Shortcut.WorkingDirectory = '[ScriptDirectory]'; $Shortcut.Save()"
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('C:\path\to\folder\[ShortcutName].lnk'); $Shortcut.TargetPath = 'C:\Windows\System32\cmd.exe'; $Shortcut.Arguments = '/K call \"C:\Users\[User]\anaconda3\Scripts\activate.bat\" [EnvName] & python [PythonScriptPath]'; $Shortcut.WorkingDirectory = '[ScriptDirectory]'; $Shortcut.IconLocation = 'C:\Path\To\Icon.ico'; $Shortcut.Save()"
 ```
 
 Replace placeholders accordingly.
+
+Example for desktop shortcut to open chat.py with a custom icon, under a conda environment named `whisper`:
+```
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('C:\Users\Me\Desktop\ReflectiveJournal.lnk'); $Shortcut.TargetPath = 'C:\Windows\System32\cmd.exe'; $Shortcut.Arguments = '/K call \"C:\Users\Me\anaconda3\Scripts\activate.bat\" whisper & python chat.py'; $Shortcut.WorkingDirectory = 'C:\Users\Me\Documents\Projects\Apps\David Shapiro\Reflective Journaling Tool'; $Shortcut.IconLocation = 'C:\Users\Me\Documents\Projects\Apps\David Shapiro\Reflective Journaling Tool\brain.ico'; $Shortcut.Save()
+```
