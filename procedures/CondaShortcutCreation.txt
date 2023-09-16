@@ -1,0 +1,7 @@
+From the Windows terminal, to create a shortcut in Windows that opens a file (such as .py) in a specific Conda environment:
+
+```
+powershell -Command "$WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('C:\Users\[User]\Desktop\[ShortcutName].lnk'); $Shortcut.TargetPath = 'C:\Windows\System32\cmd.exe'; $Shortcut.Arguments = '/K call \"C:\Users\[User]\anaconda3\Scripts\activate.bat\" [EnvName] & python [PythonScriptPath]'; $Shortcut.WorkingDirectory = '[ScriptDirectory]'; $Shortcut.Save()"
+```
+
+Replace placeholders accordingly.
