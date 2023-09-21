@@ -1,6 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-
 import re
 import os
 import json
@@ -8,6 +7,7 @@ import openai
 import markdown
 from sklearn.metrics.pairwise import cosine_similarity
 
+# Set up OpenAI
 openai.api_key = os.environ['OPENAI_API_KEY']
 
 # Load the saved embeddings
@@ -20,9 +20,16 @@ with open('text_db.json', 'r') as f:
   texts = json.load(f)['texts']
 
 app = FastAPI()
-
+  
 @app.get("/search/")
-async def search_procedure(query: str):
+async def search_procedure(request: Request, query: str = None):
+
+  if query == None:
+    data = await request.json()
+    query = str(data["query"])
+  else:
+    data = [{"query": query}]
+  
   # Generate embedding for the query using OpenAI Ada
   response = openai.Embedding.create(input=query,
                                      model="text-embedding-ada-002")
@@ -47,7 +54,6 @@ async def search_procedure(query: str):
 
   # Return the corresponding procedures
   return {"procedures": top_procedures}
-
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
