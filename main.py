@@ -19,22 +19,15 @@ with open('vector_db.json', 'r') as f:
 with open('text_db.json', 'r') as f:
   texts = json.load(f)['texts']
 
-app = FastAPI()
-  
-@app.get("/search/")
-async def search_procedure(request: Request, query: str = None):
 
-  if query == None:
-    data = await request.json()
-    query = str(data["query"])
-  else:
-    data = [{"query": query}]
-  
+# Define the search function
+def search(query):
+
   # Generate embedding for the query using OpenAI Ada
   response = openai.Embedding.create(input=query,
                                      model="text-embedding-ada-002")
   query_embedding = response['data'][0]['embedding']
-  
+
   # Compute cosine similarity
   similarities = cosine_similarity([query_embedding], embeddings)[0]
 
@@ -49,11 +42,30 @@ async def search_procedure(request: Request, query: str = None):
     if id_ not in top_ids:
       top_procedures.append(texts[str(id_)])
       top_ids.add(id_)
-      if len(top_procedures) == 2: # Change this value to control the number of results
+      if len(top_procedures
+             ) == 2:  # Change this value to control the number of results
         break
 
   # Return the corresponding procedures
   return {"procedures": top_procedures}
+
+
+app = FastAPI()
+
+
+# GET endpoint for browser testing, small queries (GET is limited to ~2000 chars)
+@app.get("/search/")
+async def search_procedure_GET(query: str):
+  return search(query)
+
+
+# POST endpoint for large queries (GET is limited to ~2000 chars)
+@app.post("/search/")
+async def search_procedure_POST(request: Request):
+  data = await request.json()
+  query = str(data["query"])
+  return search(query)
+
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
