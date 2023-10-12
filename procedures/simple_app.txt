@@ -7,6 +7,6 @@ Put Bulma CSS and anything else you need in <head>, write the <body> of the app 
 
 You probably want to center the app in a box with a border and make sure the body fills up the whole height of the page!
 
-Write **LOTS of <!--comments--> throughout the HTML and // Javascript** to the user knows what's going on, and use whitespace/indentation properly.
+Write **LOTS of <!--comments--> throughout the HTML and // Javascript** so the user knows what's going on, and use whitespace/indentation properly.
 
 This will automatically open the HTML file / simple app on the user's machine.

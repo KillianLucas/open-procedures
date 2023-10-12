@@ -1,6 +1,3 @@
-text_db.json
-vector_db.json
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
