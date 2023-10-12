@@ -1,24 +1,21 @@
 # This is used by Open Interpreter ^0.1.8.
-# It's simply [{text: embedding}, {text: embedding}, ...]
+# It's simply {text: embedding, another_text: another_embedding}
 
 import os
 import json
+import numpy as np
 from chromadb.utils.embedding_functions import DefaultEmbeddingFunction as setup_embed
 
-print("setting up function")
 # Set up the embedding function
 embed_function = setup_embed()
 
 folder_path = 'procedures'
 
-# Structures to hold embeddings and texts
-embeddings_data = []
+db = {}
 
-print("going through files")
 # Iterate through files
 for idx, filename in enumerate(os.listdir(folder_path)):
   if filename.endswith(".txt"):
-    print("filename:", filename)
     with open(os.path.join(folder_path, filename), 'r',
               encoding='utf-8') as file:
       # Read the content from the file
@@ -28,15 +25,11 @@ for idx, filename in enumerate(os.listdir(folder_path)):
       full_text = content
 
       # Embed full text using Chroma
-      print("embedding...")
-      embedding = embed_function(full_text)
-      print("done!")
+      embedding = np.squeeze(embed_function([full_text]))
 
-      # Store in desired format
-      embeddings_data.append({full_text: embedding})
+      # Store in db
+      db[full_text] = embedding
 
 # Save embeddings
 with open('procedures_db.json', 'w') as f:
-  json.dump(embeddings_data, f)
-
-print("Created `procedures_db.py`.")
+  json.dump(db, f)
