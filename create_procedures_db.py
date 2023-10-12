@@ -25,7 +25,7 @@ for idx, filename in enumerate(os.listdir(folder_path)):
       full_text = content
 
       # Embed full text using Chroma
-      embedding = np.squeeze(embed_function([full_text]))
+      embedding = np.squeeze(embed_function([full_text])).tolist()
 
       # Store in db
       db[full_text] = embedding
