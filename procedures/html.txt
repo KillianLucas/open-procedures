@@ -1,5 +1,5 @@
-trigger phrases: "design me a website", "write HTML"
+trigger phrases: "design me a website", "write HTML", "tailwind"
 
 ## Writing HTML
-Unless otherwise specified, include Tailwind CSS: `<script src="https://cdn.tailwindcss.com"></script>` then style the HTML with inline Tailwind CSS classes.
+Unless otherwise specified, include Tailwind CSS IN EXACTLY THIS WAY: `<script src="https://cdn.tailwindcss.com"></script>` (with a SCRIPT tag to "https://cdn.tailwindcss.com") then style the HTML with inline Tailwind CSS classes.
 Running `html` will automatically open it in the user's browser, you don't need to tell them to do that.
