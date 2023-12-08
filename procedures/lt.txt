@@ -1,0 +1,16 @@
+system trigger phrases: "OS control"
+
+Please execute code using `languagetools` to control the user's computer and assist them with their request.
+
+```python
+import languagetools as lt
+# All of these functions return a PIL object of the screen after the action has been performed. They will show it by default (plt.show()).
+lt.os.screenshot() # This will show you what's on the user's screen. **! You almost always want to do this first! You don't know what's on the user's screen.**
+lt.os.click("Text in a button") # This will find and click the button with that text, then show you the resulting screen.
+lt.os.click(x=0, y=0) # This will click specific coordinates. It's not as accurate as click("Text")!
+lt.os.keyboard(" ", modifiers=['command']) # Opens spotlight, for example
+
+# All lt functions accept show=False, which will disable automatically running plt.show() on the resulting screenshot.
+# This is useful if you want to click many buttons in a loop, for example.
+lt.os.keyboard("Some text...", show=False)
+```

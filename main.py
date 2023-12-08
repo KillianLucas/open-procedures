@@ -21,8 +21,7 @@ with open('text_db.json', 'r') as f:
 
 
 # Define the search function
-def search(query):
-
+def search(query, system_message=None):
   # Generate embedding for the query using OpenAI Ada
   response = openai.Embedding.create(input=query,
                                      model="text-embedding-ada-002")
@@ -45,6 +44,16 @@ def search(query):
       if len(top_procedures
              ) == 2:  # Change this value to control the number of results
         break
+  # Detect system message specific procedures
+  if system_message:
+    for text_id, text in texts.items():
+      first_line = text.split('\n')[0]
+      if 'system trigger phrases:' in first_line and first_line.split(
+          ':')[-1].strip('" ') in system_message:
+        text = text.replace(first_line, "").strip()
+        top_procedures = [text]
+        print(top_procedures)
+        break
 
   # Return the corresponding procedures
   return {"procedures": top_procedures}
@@ -63,8 +72,13 @@ async def search_procedure_GET(query: str):
 @app.post("/search/")
 async def search_procedure_POST(request: Request):
   data = await request.json()
-  query = str(data["query"])
-  return search(query)
+  if data["query"][0]["role"] == "system":
+    system_message = data["query"][0]["content"]
+    messages = str(data["query"][1:])
+  else:
+    system_message = None
+    messages = str(data["query"])
+  return search(messages, system_message=system_message)
 
 
 @app.get("/", response_class=HTMLResponse)
